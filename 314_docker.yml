@@ -1,0 +1,59 @@
+services:
+#https://github.com/YannickFricke/Satisfactory-DS-Docker/blob/master/docker-compose.yml
+  sfserver:
+    container_name: sfserver # friday_satisfactory_dedicated
+    image: yfricke/satisfactory-server
+    # network_mode: host
+    environment:
+      - SERVERIP=0.0.0.0
+    ports:
+      - 15777:15777/udp
+      - 15000:15000/udp
+      - 7777:7777/udp
+      - 7777:7777/tcp
+      - 15777:15777/tcp
+      - 15000:15000/tcp
+    volumes:
+      # - friday_satisfactory_dedicated:/home/steam
+      - friday_satisfactory_dedicated:/home/steam/.config/Epic/FactoryGame/Saved/SaveGames/server
+    restart: unless-stopped
+
+
+#https://containers.fan/posts/setup-7days-game-server-in-docker/
+#https://hub.docker.com/r/vinanrra/7dtd-server
+  7dtdserver:
+    image: vinanrra/7dtd-server
+    container_name: 7days-gameserver
+    restart: no
+    environment:
+      # documented here 
+      # https://github.com/vinanrra/Docker-7DaysToDie#parameters
+      - START_MODE=1 
+      - VERSION=stable 
+      - PUID=1000 # your uid of your user
+      - PGID=1000 # your gid of your user's group
+      - TimeZone=Africa/Johannesburg
+      - TEST_ALERT=YES
+      #- ALLOC_FIXES=YES #Optional - Install ALLOC FIXES
+    volumes:
+      - seven_days_friday:/home/sdtdserver/
+    ports:
+      - 26900:26900/tcp
+      - 26900:26900/udp
+      - 26901:26901/udp
+      - 26902:26902/udp
+      - 8080:8080/tcp 
+      - 8081:8081/tcp 
+      - 8082:8082/tcp
+#    restart: unless-stopped #NEVER USE WITH START_MODE=4 or START_MODE=0
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+
+volumes:
+  seven_days_friday:
+  friday_satisfactory:
+  friday_satisfactory_steam_home:
+  friday_satisfactory_dedicated:
+        
