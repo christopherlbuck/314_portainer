@@ -3,7 +3,6 @@ services:
   sfserver:
     container_name: sfserver # friday_satisfactory_dedicated
     image: yfricke/satisfactory-server
-    # network_mode: host
     environment:
       - SERVERIP=0.0.0.0
     ports:
@@ -14,7 +13,6 @@ services:
       - 15777:15777/tcp
       - 15000:15000/tcp
     volumes:
-      # - friday_satisfactory_dedicated:/home/steam
       - friday_satisfactory_dedicated:/home/steam/.config/Epic/FactoryGame/Saved/SaveGames/server
     restart: no
 
@@ -53,7 +51,5 @@ services:
 
 volumes:
   seven_days_friday:
-  friday_satisfactory:
-  friday_satisfactory_steam_home:
   friday_satisfactory_dedicated:
         
