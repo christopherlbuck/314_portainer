@@ -16,7 +16,7 @@ services:
     volumes:
       # - friday_satisfactory_dedicated:/home/steam
       - friday_satisfactory_dedicated:/home/steam/.config/Epic/FactoryGame/Saved/SaveGames/server
-    restart: unless-stopped
+    restart: no
 
 
 #https://containers.fan/posts/setup-7days-game-server-in-docker/
